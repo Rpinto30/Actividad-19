@@ -18,7 +18,7 @@ class Cookie:
         self.price = price
         self.weight = weight
 
-class ChocolateChips(Cookie):
+class CookieChips(Cookie):
     def __init__(self, name, price, weight, chips):
         # Uso de super() para heredar los atributos del objeto Padre
         #https://ellibrodepython.com/herencia-en-python
@@ -52,17 +52,29 @@ class CookiesSystem:
             _weight = input_number("Ingresa el peso de tu galleta: ")
             if _weight >= 0: break
             print("\nEl peso debe ser mayor o igual a 0, intenta de nuevo por favor")
-        return _name, _price, _weight
+        return _name, _price, _weight #Se regresa una tupla con las tres variables, ya solo para llamar el método y no escribir otra vez el codigo
 
     def add_cookie(self):
         name, price, weight = self.consult_cookie()
         self.cookies.append(Cookie(name, price, weight))
 
     def add_cookie_chips(self):
-        pass
+        name, price, weight = self.consult_cookie()
+        while True:
+            chips = input_number("Ingresa la cantidad de chispas de tu galleta: ")
+            if chips > 0: break
+            else: print("\nLo siento, tu gallta debe de tener una cantidad de chispas mayor a 0")
+
+        self.cookies.append(CookieChips(name, price, weight, chips))
 
     def add_cookie_filling(self):
-        pass
+        name, price, weight = self.consult_cookie()
+        while True:
+            filling = input("Ingresa el tipo de relleno de tu galleta: ")
+            if filling != '': break
+            else: print("\nLo siento, tu gallta debe de tener un tipo de relleno")
+
+        self.cookies.append(FillingCookie(name, price, weight, filling))
 
     def list_cookies(self):
         pass
