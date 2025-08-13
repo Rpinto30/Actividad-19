@@ -99,10 +99,20 @@ class CookiesSystem:
             print(f"Lo sentimos, no encontramos la galleta {name}")
 
     def del_cookie(self):
-        pass
+        print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
+        name = input("Ingresa el nombre de la galleta que quieres buscar: ")
+        for i in self.cookies:
+            if i.name == name:
+                self.cookies.remove(i)
+                print("La galleta fue removida correctamente!")
+                break
+        else:
+            print(f"Lo sentimos, no encontramos la galleta {name}")
 
 
 sys_cookie = CookiesSystem()
 
-sys_cookie.add_cookie()
-print(sys_cookie.cookies)
+
+while True:
+    print("COOKIES")
+    print("1) Registrar galleta basica\n2) Registrar galleta con chispas\n3) Regsitrar galleta rellena\n4) Listar galletas\n5) Buscar por nombre\n6) Eliminar galleta\n7) Eliminar galleta")
