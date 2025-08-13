@@ -61,7 +61,7 @@ class CookiesSystem:
     def add_cookie(self):
         print("-" * 20 + "AÑADIR GALLETA" + "-" * 20)
         name, price, weight = self.consult_cookie()
-        self.cookies.append(Cookie(name, price, weight))
+        self.cookies.append(Cookie(name, price, weight)) #sE AÑADE A LA LISTA EL COOKIE BASICO
 
     def add_cookie_chips(self):
         print("-" * 20 + "AÑADIR GALLETA CON CHISPAS" + "-" * 20)
@@ -70,7 +70,7 @@ class CookiesSystem:
             chips = input_number("Ingresa la cantidad de chispas de tu galleta: ")
             if chips > 0: break
             else: print("\nLo siento, tu gallta debe de tener una cantidad de chispas mayor a 0")
-
+        #Se añade a ka kusta el cookiechips
         self.cookies.append(CookieChips(name, price, weight, chips))
 
     def add_cookie_filling(self):
@@ -80,14 +80,15 @@ class CookiesSystem:
             filling = input("Ingresa el tipo de relleno de tu galleta: ")
             if filling != '': break
             else: print("\nLo siento, tu gallta debe de tener un tipo de relleno")
-
+        #Se añade a la lista el fillingcookie
         self.cookies.append(FillingCookie(name, price, weight, filling))
 
     def list_cookies(self):
         if self.cookies:
             print("-"*20+"GALLETAS"+"-"*20)
             for num, i in enumerate(self.cookies,1):
-                print(f"{num}) ", end='')
+                # Se llama a show_inf(), en caso de las galletas rellenas, el mismo show_inf() llama a otro metodo para mostrar el relleno
+                print(f"{num}) ", end='') #Se imprime la numeración y luego la info de las galletas
                 i.show_inf()
         else: print("\n Lo sentimos, no hay galletas registradas")
 
@@ -97,7 +98,7 @@ class CookiesSystem:
             name = input("Ingresa el nombre de la galleta que quieres buscar: ").lower()
             for i in self.cookies:
                 if i.name.lower() == name:
-                    i.show_inf()
+                    i.show_inf() #Si la galleta se encuentra se llama a su medotod show_inf()
                     break
             else:
                 print(f"Lo sentimos, no encontramos la galleta {name}")
@@ -105,10 +106,10 @@ class CookiesSystem:
 
     def del_cookie(self):
         print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
-        name = input("Ingresa el nombre de la galleta que quieres buscar: ").lower()
+        name = input("Ingresa el nombre de la galleta que quieres buscar: ").lower() #Para evitar que no lo encuentre solo por las mayusculas
         for i in self.cookies:
             if i.name.lower() == name:
-                self.cookies.remove(i)
+                self.cookies.remove(i) #Se remueve de la lista solo si el elemento fue encontrado
                 print("La galleta fue removida correctamente!")
                 break
         else:
