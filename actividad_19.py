@@ -52,7 +52,8 @@ class CookiesSystem:
             _weight = input_number("Ingresa el peso de tu galleta: ")
             if _weight >= 0: break
             print("\nEl peso debe ser mayor o igual a 0, intenta de nuevo por favor")
-        return _name, _price, _weight #Se regresa una tupla con las tres variables, ya solo para llamar el método y no escribir otra vez el codigo
+        # Se regresa una tupla con las tres variables, ya solo para llamar el metdoto y no escribir otra vez el codigo
+        return _name, _price, _weight
 
     def add_cookie(self):
         name, price, weight = self.consult_cookie()
