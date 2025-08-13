@@ -24,4 +24,24 @@ class FillingCookie(Cookie, Filling):
         print(f"La galleta: {self.name} Precio: {self.price} | Pesa: {self.weight}")
         self.describe()
 
+class CookiesSystem:
+    def add_cookie(self):
+        pass
+
+    def add_cookie_chips(self):
+        pass
+
+    def add_cookie_filling(self):
+        pass
+
+    def list_cookies(self):
+        pass
+
+    def find_cookie(self):
+        pass
+
+    def del_cookie(self):
+        pass
+
+
 co = Cookie('', -1,-2)
