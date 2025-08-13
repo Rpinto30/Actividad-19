@@ -18,6 +18,9 @@ class Cookie:
         self.price = price
         self.weight = weight
 
+    def show_inf(self):
+        print(f"La galleta: {self.name} Precio: {self.price} | Pesa: {self.weight}")
+
 class CookieChips(Cookie):
     def __init__(self, name, price, weight, chips):
         # Uso de super() para heredar los atributos del objeto Padre
@@ -56,10 +59,12 @@ class CookiesSystem:
         return _name, _price, _weight
 
     def add_cookie(self):
+        print("-" * 20 + "AÑADIR GALLETA" + "-" * 20)
         name, price, weight = self.consult_cookie()
         self.cookies.append(Cookie(name, price, weight))
 
     def add_cookie_chips(self):
+        print("-" * 20 + "AÑADIR GALLETA CON CHISPAS" + "-" * 20)
         name, price, weight = self.consult_cookie()
         while True:
             chips = input_number("Ingresa la cantidad de chispas de tu galleta: ")
@@ -69,6 +74,7 @@ class CookiesSystem:
         self.cookies.append(CookieChips(name, price, weight, chips))
 
     def add_cookie_filling(self):
+        print("-" * 20 + "AÑADIR GALLETA CON RELLENO" + "-" * 20)
         name, price, weight = self.consult_cookie()
         while True:
             filling = input("Ingresa el tipo de relleno de tu galleta: ")
@@ -78,10 +84,19 @@ class CookiesSystem:
         self.cookies.append(FillingCookie(name, price, weight, filling))
 
     def list_cookies(self):
-        pass
+        print("-"*20+"GALLETAS"+"-"*20)
+        for i in self.cookies:
+            i.show_inf()
 
     def find_cookie(self):
-        pass
+        print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
+        name = input("Ingresa el nombre de la galleta que quieres buscar: ")
+        for i in self.cookies:
+            if i.name == name:
+                i.show_inf()
+                break
+        else:
+            print(f"Lo sentimos, no encontramos la galleta {name}")
 
     def del_cookie(self):
         pass
