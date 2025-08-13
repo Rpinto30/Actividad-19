@@ -1,3 +1,7 @@
+class Filling:
+    def __init__(self, filling_type): self.filling_type = filling_type
+    def describe(self): print(f"El relleno de tu galleta es: {self.filling_type}")
+
 class Cookie:
     def __init__(self, name, price, weight):
         try:
@@ -12,7 +16,7 @@ class Cookie:
         except Exception as e:
             print(f"Error al crear Producto: {e}")
 
-class Chocolate_chips(Cookie):
+class ChocolateChips(Cookie):
     def __init__(self, name, price, weight, chips):
         # Uso de super() para heredar los atributos del objeto Padre
         #https://ellibrodepython.com/herencia-en-python
@@ -22,5 +26,8 @@ class Chocolate_chips(Cookie):
             self.chips = chips
         except Exception as e:
             print(f"Error al crear Producto: {e}")
+
+class FillingCookie:
+    pass
 
 co = Cookie('name', 0,-2)
