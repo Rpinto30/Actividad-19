@@ -10,7 +10,7 @@ def input_number(message): #INGRESAR UN NUMERO Y VERIFICAR QUE SU ENTRADA SEA VA
 
 class Filling:
     def __init__(self, filling_type): self.filling_type = filling_type
-    def describe(self): print(f"El relleno de tu galleta es: {self.filling_type}")
+    def describe(self): print(f"    > El relleno de tu galleta es: {self.filling_type}")
 
 class Cookie:
     def __init__(self, name, price, weight):
@@ -19,7 +19,7 @@ class Cookie:
         self.weight = weight
 
     def show_inf(self):
-        print(f"La galleta: {self.name} Precio: {self.price} | Pesa: {self.weight}")
+        print(f"Galleta: {self.name} (Precio: Q{self.price} | Pesa: {self.weight} kg)")
 
 class CookieChips(Cookie):
     def __init__(self, name, price, weight, chips):
@@ -34,7 +34,7 @@ class FillingCookie(Cookie, Filling):
         Filling.__init__(self, filling_type)
 
     def show_inf(self):
-        print(f"La galleta: {self.name} Precio: {self.price} | Pesa: {self.weight}")
+        print(f"Galleta: {self.name} (Precio: Q{self.price} | Pesa: {self.weight} Kg)")
         self.describe()
 
 class CookiesSystem:
@@ -84,25 +84,30 @@ class CookiesSystem:
         self.cookies.append(FillingCookie(name, price, weight, filling))
 
     def list_cookies(self):
-        print("-"*20+"GALLETAS"+"-"*20)
-        for i in self.cookies:
-            i.show_inf()
+        if self.cookies:
+            print("-"*20+"GALLETAS"+"-"*20)
+            for num, i in enumerate(self.cookies,1):
+                print(f"{num}) ", end='')
+                i.show_inf()
+        else: print("\n Lo sentimos, no hay galletas registradas")
 
     def find_cookie(self):
-        print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
-        name = input("Ingresa el nombre de la galleta que quieres buscar: ")
-        for i in self.cookies:
-            if i.name == name:
-                i.show_inf()
-                break
-        else:
-            print(f"Lo sentimos, no encontramos la galleta {name}")
+        if self.cookies:
+            print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
+            name = input("Ingresa el nombre de la galleta que quieres buscar: ").lower()
+            for i in self.cookies:
+                if i.name.lower() == name:
+                    i.show_inf()
+                    break
+            else:
+                print(f"Lo sentimos, no encontramos la galleta {name}")
+        else: print("\n Lo sentimos, no hay galletas registradas")
 
     def del_cookie(self):
         print("-" * 20 + "BUSCAR GALLETA" + "-" * 20)
-        name = input("Ingresa el nombre de la galleta que quieres buscar: ")
+        name = input("Ingresa el nombre de la galleta que quieres buscar: ").lower()
         for i in self.cookies:
-            if i.name == name:
+            if i.name.lower() == name:
                 self.cookies.remove(i)
                 print("La galleta fue removida correctamente!")
                 break
@@ -114,5 +119,21 @@ sys_cookie = CookiesSystem()
 
 
 while True:
-    print("COOKIES")
-    print("1) Registrar galleta basica\n2) Registrar galleta con chispas\n3) Regsitrar galleta rellena\n4) Listar galletas\n5) Buscar por nombre\n6) Eliminar galleta\n7) Eliminar galleta")
+    try:
+        print("-"*20+"COOKIES"+"-"*20)
+        print("1) Registrar galleta basica\n2) Registrar galleta con chispas\n3) Regsitrar galleta rellena\n4) Listar galletas\n5) Buscar por nombre\n6) Eliminar galleta\n7) Salir")
+        op = input("Ingresa una opción: ")
+        match op:
+            case '1': sys_cookie.add_cookie()
+            case '2': sys_cookie.add_cookie_chips()
+            case '3': sys_cookie.add_cookie_filling()
+            case '4': sys_cookie.list_cookies()
+            case '5': sys_cookie.find_cookie()
+            case '6': sys_cookie.del_cookie()
+            case '7':
+                print("\nNos vemos!")
+                break
+            case _: print("\nPorfavor, elige una opción valida")
+    except Exception as e:
+        print("\nVaya... parece que hubo un error inesperado, devolviendo al menú principal")
+        print("Error: ", e)
